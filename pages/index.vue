@@ -24,23 +24,23 @@
           GitHub
         </a>
       </div>
-      <el-table
-        :data="items">
-        <el-table-column
-          prop="title"
-          label="名称">
-        </el-table-column>
-        <el-table-column
-          prop="body"
-          label="学名">
-        </el-table-column>
-        <el-table-column
-          label="画像">
-          <template slot-scope="scope">
-            <img :src="scope.row.image.url" />
-          </template>
-        </el-table-column>
-      </el-table>
+        <el-table
+          :data="items">
+          <el-table-column
+            prop="title"
+            label="タイトル">
+          </el-table-column>
+          <el-table-column
+            prop="body"
+            label="本文">
+          </el-table-column>
+          <el-table-column
+            label="画像">
+            <template slot-scope="scope">
+              <img :src="scope.row.image.url" />
+            </template>
+          </el-table-column>
+        </el-table>
     </div>
   </div>
 </template>

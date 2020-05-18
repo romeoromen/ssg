@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>キャリア</h2>
+    <h2>{{items[0].careers.name}}一覧</h2>
     <div v-for="item in items" :key="item" class="item-box">
       <nuxt-link :to="'posts/' + item.id">
         <h2>

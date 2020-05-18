@@ -1,15 +1,15 @@
 <template>
-  <div class="items">
-    <!-- itemsをforでまわし、itemにそれぞれのデータが入ります。 -->
-    <div v-for="item in items" :key="item" class="item-box">
-      <!-- <template>
-        <img :src="item.image.url">
-      </template> -->
-      <nuxt-link :to="'careers/' + item.id">
-        <h2>
-          {{ item.name }}
-        </h2>
-      </nuxt-link>
+  <div class="container">
+    <logo />
+    <div class="items">
+      <!-- itemsをforでまわし、itemにそれぞれのデータが入ります。 -->
+      <div v-for="item in items" :key="item" class="item">
+        <nuxt-link :to="'careers/' + item.id">
+          <h2>
+            {{ item.name }}
+          </h2>
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +42,7 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -67,5 +68,13 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+.items {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.item {
+  width: calc(50% - 20px);
 }
 </style>

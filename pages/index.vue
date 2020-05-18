@@ -2,12 +2,14 @@
   <div class="items">
     <!-- itemsをforでまわし、itemにそれぞれのデータが入ります。 -->
     <div v-for="item in items" :key="item" class="item-box">
-      <div class="title">
-        <!-- item内のtitleを取得する -->
-        {{ item.title }}
-      </div>
-      <!-- item内のdescriptionをHTMLタグも取得するためv-htmlで設定します。 -->
-      <div class="description" v-html="item.body" />
+      <!-- <template>
+        <img :src="item.image.url">
+      </template> -->
+      <nuxt-link :to="'careers/' + item.id">
+        <h2>
+          {{ item.name }}
+        </h2>
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -24,8 +26,8 @@ export default {
       items: []
     }
   },
-  async asyncData () {
-    const { data } = await axios.get('https://wiz_uchida.microcms.io/api/v1/post', {
+  async asyncData() {
+    const { data } = await axios.get('https://wiz_uchida.microcms.io/api/v1/careers', {
       headers: { 'X-API-KEY': process.env.API_KEY }
     })
     return {

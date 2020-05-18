@@ -1,6 +1,7 @@
 
 require("dotenv").config();
 const { API_KEY } = process.env;
+const axios = require("axios");
 export default {
   mode: 'universal',
   /*
@@ -40,6 +41,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/markdownit',
   ],
   /*
   ** Build configuration
@@ -51,7 +53,37 @@ export default {
     extend (config, ctx) {
     }
   },
+  markdownit: {
+    html: true,
+    injected: true,
+    preset: 'default',
+  },
   env: {
     API_KEY
-  }
+  },
+  generate: {
+    routes() {
+     const careers = axios
+      .get("https://wiz_uchida.microcms.io/api/v1/careers", {
+       headers: { "X-API-KEY": process.env.API_KEY }
+      })
+      .then(res => {
+       return res.data.contents.map(career => {
+        return "/careers/" + career.id;
+       });
+      });
+     const posts = axios
+      .get("https://wiz_uchida.microcms.io/api/v1/posts", {
+       headers: { "X-API-KEY": process.env.API_KEY }
+      })
+      .then(res => {
+       return res.data.contents.map(post => {
+        return "/careers/posts/" + post.id;
+       });
+      });
+     return Promise.all([careers, posts]).then(values => {
+      return values.join().split(",");
+     });
+    }
+  },
 }

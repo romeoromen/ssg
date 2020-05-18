@@ -27,11 +27,11 @@
       <el-table
         :data="items">
         <el-table-column
-          prop="name"
+          prop="title"
           label="名称">
         </el-table-column>
         <el-table-column
-          prop="scientificName"
+          prop="body"
           label="学名">
         </el-table-column>
         <el-table-column

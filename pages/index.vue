@@ -1,46 +1,13 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        jamstack-demo
-      </h1>
-      <h2 class="subtitle">
-        jamstack-demo
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div class="items">
+    <!-- itemsをforでまわし、itemにそれぞれのデータが入ります。 -->
+    <div v-for="item in items" :key="item" class="item-box">
+      <div class="title">
+        <!-- item内のtitleを取得する -->
+        {{ item.title }}
       </div>
-        <el-table
-          :data="items">
-          <el-table-column
-            prop="title"
-            label="タイトル">
-          </el-table-column>
-          <el-table-column
-            prop="body"
-            label="本文">
-          </el-table-column>
-          <el-table-column
-            label="画像">
-            <template slot-scope="scope">
-              <img :src="scope.row.image.url" />
-            </template>
-          </el-table-column>
-        </el-table>
+      <!-- item内のdescriptionをHTMLタグも取得するためv-htmlで設定します。 -->
+      <div class="description" v-html="item.body" />
     </div>
   </div>
 </template>
@@ -59,7 +26,7 @@ export default {
   },
   async asyncData () {
     const { data } = await axios.get('https://wiz_uchida.microcms.io/api/v1/post', {
-      headers: { 'X-API-KEY': 'e39ea31e-6508-478a-8725-63482c62f101' }
+      headers: { 'X-API-KEY': process.env.API_KEY }
     })
     return {
       items: data.contents
